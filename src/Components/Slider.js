@@ -13,7 +13,7 @@ function valuetext(value) {
   return `${value}°C`;
 }
 
-export default function DiscreteSlider() {
+export default function DiscreteSlider({volumeHandler}) {
   const classes = useStyles();
 
   return (
@@ -28,6 +28,8 @@ export default function DiscreteSlider() {
         marks
         min={10}
         max={110}
+
+        onChange={volumeHandler}
       />
       
     </div>

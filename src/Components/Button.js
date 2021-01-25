@@ -10,14 +10,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ContainedButtons(props) {
+export default function ContainedButtons({handleLoginClick}) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      {console.log(props.handleLoginClick, props.randomProp)}
-      <Button variant="contained" color="primary" style={{width: '250px'}} onClick={() => {}} >
-        {props.randomProp}
+      
+      <Button variant="contained" color="primary" style={{width: '250px'}} onClick={handleLoginClick}  >
+        Login
       </Button>
       
     </div>

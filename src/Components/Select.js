@@ -16,13 +16,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleSelect() {
+export default function SimpleSelect({selectHandler, quality}) {
   const classes = useStyles();
-  const [age, setAge] = React.useState('');
+  
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+  
 
   return (
     <div>
@@ -30,21 +28,21 @@ export default function SimpleSelect() {
       
       <FormControl className={classes.formControl}>
         <Select
-          value={age}
-          onChange={handleChange}
+          value={quality}
+          onChange={selectHandler}
           displayEmpty
           className={classes.selectEmpty}
           inputProps={{ 'aria-label': 'Without label' }}
           style={{width: '200px'}}
         >
-          <MenuItem value="">
-            <em>Normal</em>
+          <MenuItem value="Normal">
+            Normal
           </MenuItem>
-          <MenuItem value="">
-            <em>Low</em>
+          <MenuItem value="Low">
+            Low
           </MenuItem>
-          <MenuItem value="">
-            <em>High</em>
+          <MenuItem value="High">
+            High
           </MenuItem>
           
         </Select>

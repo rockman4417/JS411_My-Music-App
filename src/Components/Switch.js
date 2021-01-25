@@ -1,21 +1,16 @@
 import React from 'react';
 import Switch from '@material-ui/core/Switch';
 
-export default function Switches() {
-  const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
-  });
+export default function Switches({toggleOnline, online}) {
+  
 
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
+  
 
   return (
     <div>
       <Switch
-        checked={state.checkedA}
-        onChange={handleChange}
+        checked={online}
+        onChange={toggleOnline}
         name="checkedA"
         inputProps={{ 'aria-label': 'secondary checkbox' }}
       />

@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SimpleCard() {
+export default function SimpleCard({selectHandler, quality}) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
@@ -42,7 +42,7 @@ export default function SimpleCard() {
         </Typography>
       </CardContent>
       <CardActions style={{display: 'flex', justifyContent: 'center'}}>
-        <Select/>
+        <Select selectHandler={selectHandler} quality={quality}/>
       </CardActions>
     </Card>
   );

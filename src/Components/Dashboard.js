@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import Textfield from './Textfield.js'
 import Button from './Button'
@@ -11,7 +11,50 @@ import Notifications from './Notifications'
 export default function Dashboard() {
 
     const [loggedIn, setLoggedIn] = useState(false)
+    const [online, setOnline] = useState(true)
+    const [volume, setVolume] = useState(10)
+    const [quality, setQuality] = useState('normal')
+    const [notifications, setNotifications] = useState([])
 
+
+    useEffect(()=> {
+        
+        console.log(notifications)
+        if(!online) {
+            setNotifications([...notifications, "you are offline!"]);
+        } else {
+            setNotifications(notifications.filter(notification => {
+                return notification !== "you are offline!";
+            }))
+        }
+
+    }, [online])
+
+    useEffect(()=> {
+        setNotifications(notifications.filter(notification => {
+            return notification !== "volume is too high!";
+            }))
+
+        if(volume > 80) {
+            setNotifications([...notifications, "volume is too high!"])
+        } else setNotifications(notifications.filter(notification => {
+            return notification !== "volume is too high!";
+            }))
+
+    }, [volume])
+
+    useEffect(()=> {
+
+        if(quality === 'Low') {
+            setNotifications([...notifications, "quality set to low"])
+        } else setNotifications(notifications.filter(notification => {
+            return notification !== "quality set to low";
+        }))
+
+    }, [quality])
+
+
+    
     const handleLoginClick = () => {
         if(!loggedIn){
             console.log("clicked!")
@@ -21,6 +64,20 @@ export default function Dashboard() {
             setLoggedIn(false)
         }
 
+    }
+
+    const selectHandler = (event) => {
+        setQuality(event.target.value)
+    }
+
+    const volumeHandler = (event, newValue) => {
+        console.log('event.target.value', newValue)
+        setVolume(newValue)
+    }
+
+    const toggleOnline = (event) => {
+        console.log(event.target.checked)
+        setOnline(event.target.checked)
     }
 
     
@@ -37,8 +94,7 @@ export default function Dashboard() {
 
             </div>
             <div>
-            <button onClick={handleLoginClick}>Login</button>
-            <Button  onClick={() => { alert('clicked') }} randomProp={'this is a test prop'} passedFunction={handleLoginClick}/>
+            <Button handleLoginClick={handleLoginClick} />
             </div>
             
         </div>
@@ -52,13 +108,13 @@ export default function Dashboard() {
         </div>
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
             
-            <SettingsCardSwitch/>
-            <SettingsCardSlider/>
-            <SettingsCardSelect/>
+            <SettingsCardSwitch toggleOnline={toggleOnline} online={online}/>
+            <SettingsCardSlider volumeHandler={volumeHandler}/>
+            <SettingsCardSelect selectHandler={selectHandler} quality={quality}/>
             
         </div>
-        <Notifications/>
-        <button onClick={handleLoginClick}>Logout</button>
+        <Notifications notifications={notifications}/>
+        <Button handleLoginClick={handleLoginClick} />
     </div>
             
             
