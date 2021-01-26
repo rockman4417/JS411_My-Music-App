@@ -10,14 +10,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ContainedButtons({handleLoginClick}) {
+export default function ContainedButtons({handleLoginClick, Logged}) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       
       <Button variant="contained" color="primary" style={{width: '250px'}} onClick={handleLoginClick}  >
-        Login
+        {Logged}
       </Button>
       
     </div>

@@ -27,7 +27,7 @@ export default function DiscreteSlider({volumeHandler}) {
         step={10}
         marks
         min={10}
-        max={110}
+        max={100}
 
         onChange={volumeHandler}
       />

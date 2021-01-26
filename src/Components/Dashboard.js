@@ -21,34 +21,35 @@ export default function Dashboard() {
         
         console.log(notifications)
         if(!online) {
-            setNotifications([...notifications, "you are offline!"]);
+            setNotifications([...notifications, "Your application is offline. You won't be able to share or stream music to other devices."]);
         } else {
             setNotifications(notifications.filter(notification => {
-                return notification !== "you are offline!";
+                return notification !== "Your application is offline. You won't be able to share or stream music to other devices.";
             }))
         }
 
     }, [online])
 
     useEffect(()=> {
-        setNotifications(notifications.filter(notification => {
-            return notification !== "volume is too high!";
-            }))
+        
+        if(volume >= 80 && !notifications.includes('Listening to music at a high volume could cause long-term hearing loss.')) {
+            setNotifications([...notifications, "Listening to music at a high volume could cause long-term hearing loss."])
+        } 
 
-        if(volume > 80) {
-            setNotifications([...notifications, "volume is too high!"])
-        } else setNotifications(notifications.filter(notification => {
-            return notification !== "volume is too high!";
-            }))
+        if(volume < 80) {
+            setNotifications(notifications.filter(notification => {
+                return notification !== "Listening to music at a high volume could cause long-term hearing loss.";
+                }))
+        }
 
     }, [volume])
 
     useEffect(()=> {
 
         if(quality === 'Low') {
-            setNotifications([...notifications, "quality set to low"])
+            setNotifications([...notifications, "Music quality is degraded. Increase quality if your connection allows it."])
         } else setNotifications(notifications.filter(notification => {
-            return notification !== "quality set to low";
+            return notification !== "Music quality is degraded. Increase quality if your connection allows it.";
         }))
 
     }, [quality])
@@ -84,44 +85,33 @@ export default function Dashboard() {
     
     if(!loggedIn) {
         return (
-            <div>
         <div>
-            <Navbar/>
-        </div>
-        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
             <div>
-            <Textfield/>
-
+                <Navbar/>
             </div>
-            <div>
-            <Button handleLoginClick={handleLoginClick} />
+            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}} >
+                <Textfield handleLoginClick={handleLoginClick} Logged={'Login'}/>
             </div>
-            
         </div>
-    </div>
         )
     } else {
         return (
-            <div>
-        <div style={{marginBottom: '150px'}}>
-            <Navbar/>
-        </div>
-        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <div>
+            <div style={{marginBottom: '150px'}}>
+                <Navbar/>
+            </div>
+            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
             
-            <SettingsCardSwitch toggleOnline={toggleOnline} online={online}/>
-            <SettingsCardSlider volumeHandler={volumeHandler}/>
-            <SettingsCardSelect selectHandler={selectHandler} quality={quality}/>
+                <SettingsCardSwitch toggleOnline={toggleOnline} online={online}/>
+                <SettingsCardSlider volumeHandler={volumeHandler}/>
+                <SettingsCardSelect selectHandler={selectHandler} quality={quality}/>
             
-        </div>
-        <Notifications notifications={notifications}/>
-        <Button handleLoginClick={handleLoginClick} />
-    </div>
-            
-            
-            )
-    }
+            </div>
 
-    
-        
-    
+            <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'column'}}>
+                <Notifications notifications={notifications}/>
+                <Button handleLoginClick={handleLoginClick} Logged={'Logout'} />
+            </div>
+        </div>
+    )}
 }
