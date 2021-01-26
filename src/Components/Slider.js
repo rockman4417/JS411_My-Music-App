@@ -26,7 +26,7 @@ export default function DiscreteSlider({volumeHandler}) {
         valueLabelDisplay="auto"
         step={10}
         marks
-        min={10}
+        min={0}
         max={100}
 
         onChange={volumeHandler}

@@ -7,14 +7,19 @@ import SettingsCardSelect from './SettingsCardSelect'
 import SettingsCardSlider from './SettingsCardSlider'
 import SettingsCardSwitch from './SettingsCardSwitch'
 import Notifications from './Notifications'
+import ReactAudioPlayer from 'react-audio-player';
+import mp3_file from './Marvin_Gaye_-_Let_s_Get_It_On_Qoret.com.mp3';
+
  
 export default function Dashboard() {
 
     const [loggedIn, setLoggedIn] = useState(false)
     const [online, setOnline] = useState(true)
-    const [volume, setVolume] = useState(10)
+    const [volume, setVolume] = useState(50)
     const [quality, setQuality] = useState('normal')
     const [notifications, setNotifications] = useState([])
+    
+    
 
 
     useEffect(()=> {
@@ -96,12 +101,26 @@ export default function Dashboard() {
         )
     } else {
         return (
+            
         <div>
+            
             <div style={{marginBottom: '150px'}}>
                 <Navbar/>
+                
             </div>
+            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '75px'}}>
+                <ReactAudioPlayer
+                    src={mp3_file}
+                    type="audio/mp3"
+                    autoPlay
+                    controls
+                    muted={!online}
+                    volume={volume * .01}
+                />
+            </div>
+
             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            
+
                 <SettingsCardSwitch toggleOnline={toggleOnline} online={online}/>
                 <SettingsCardSlider volumeHandler={volumeHandler}/>
                 <SettingsCardSelect selectHandler={selectHandler} quality={quality}/>
