@@ -108,8 +108,10 @@ export default function Dashboard() {
             
             </div>
 
-            <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'column'}}>
+            <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'column', height: '100px', marginBottom: '100px'}}>
                 <Notifications notifications={notifications}/>
+            </div>
+            <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'column'}}>
                 <Button handleLoginClick={handleLoginClick} Logged={'Logout'} />
             </div>
         </div>
