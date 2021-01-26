@@ -89,7 +89,7 @@ export default function Dashboard() {
             <div>
                 <Navbar/>
             </div>
-            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}} >
+            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', marginTop: '100px'}} >
                 <Textfield handleLoginClick={handleLoginClick} Logged={'Login'}/>
             </div>
         </div>

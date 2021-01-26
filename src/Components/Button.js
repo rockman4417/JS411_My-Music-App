@@ -16,7 +16,7 @@ export default function ContainedButtons({handleLoginClick, Logged}) {
   return (
     <div className={classes.root}>
       
-      <Button variant="contained" color="primary" style={{width: '250px'}} onClick={handleLoginClick}  >
+      <Button variant="contained" color="primary" style={{width: '250px'}} onClick={handleLoginClick} >
         {Logged}
       </Button>
       
