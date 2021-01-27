@@ -10,18 +10,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ContainedButtons({handleLoginClick, Logged}) {
+export default function ContainedButtons({ handleLoginClick, Logged, type}) {
+  
   const classes = useStyles();
 
-  return (
-    <div className={classes.root}>
-      
-      <Button variant="contained" color="primary" style={{width: '250px'}} onClick={handleLoginClick} >
-        {Logged}
-      </Button>
-      
-    </div>
-  );
+  if(Logged === 'Login') {
+    return (
+      <div className={classes.root}>
+        <Button variant="contained" color="primary" style={{width: '250px'}} type={type}>
+          {Logged}
+        </Button>
+      </div>
+    );
+  } else {
+    return (
+
+      <div className={classes.root}>
+        <Button variant="contained" color="primary" style={{width: '250px'}} onClick={handleLoginClick}>
+          {Logged}
+        </Button>
+      </div>
+    )
+  }
 }
 
-//onClick={props.handleLoginClick}

@@ -17,9 +17,19 @@ export default function BasicTextFields({handleLoginClick, Logged}) {
   const classes = useStyles();
 
   return (
-    <form className={classes.root} noValidate autoComplete="off" style={{display: 'flex', flexDirection: 'column'}}>
-      <TextField id="standard-basic" label="Username*" style={{width: '250px'}} required/>
-      <TextField id="standard-basic" label="Password*" style={{width: '250px'}} required/>
+    <form className={classes.root} autoComplete="off" style={{display: 'flex', flexDirection: 'column'}} onSubmit={handleLoginClick}>
+      <TextField
+          required 
+          id="standard-basic" 
+          label="Username" 
+          type="text"
+          style={{width: '250px'}}/>
+      <TextField 
+          required
+          id="standard-basic" 
+          label="Password" 
+          type='password' 
+          style={{width: '250px'}}/>
       <Button handleLoginClick={handleLoginClick} Logged={'Login'} type='submit'/>
     </form>
   );
